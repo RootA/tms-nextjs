@@ -13,7 +13,6 @@ export default class MyDocument extends Document {
     return (
       <html>
         <Head>
-          <title>TMS</title>
           {this.props.styleTags}
         </Head>
         <body>

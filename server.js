@@ -5,6 +5,8 @@ const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
 const handle = app.getRequestHandler()
 
+api_url = 'http://localhost:5000/api/v1/'
+
 app.prepare()
 .then(() => {
   const server = express()
@@ -14,6 +16,12 @@ app.prepare()
       const queryParams = { public_id: req.params.public_id }
       app.render(req, res, actualPage, queryParams)
   })
+
+  server.get('/readmore/:public_id', (req, res) => {
+    const actualPage = '/readmore'
+    const queryParams = { public_id: req.params.public_id }
+    app.render(req, res, actualPage, queryParams)
+})
 
   server.get('*', (req, res) => {
     return handle(req, res)

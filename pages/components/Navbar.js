@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import styled from 'styled-components'
 
-const NavColor = styled.nav`
+const Nav= styled.nav`
   padding-top: 15px;
   padding-bottom: 15px;
   border: 0;
@@ -12,7 +12,7 @@ const NavColor = styled.nav`
 `
 
 const Navbar = () => (
-  <NavColor className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+  <Nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div className="container">
         <a className="navbar-brand" href="/">TMS</a>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,13 +31,16 @@ const Navbar = () => (
             <Link className="nav-item" as={`/`}>
               <a className="nav-link" href="/">Tenders</a>
             </Link>
+            <Link className="nav-item" as={`/login`}>
+              <a className="nav-link" href="/login">Login</a>
+            </Link>
             <Link className="nav-item">
               <a className="nav-link" href="#">Contact</a>
             </Link>
           </ul>
         </div>
     </div>
-  </NavColor>
+  </Nav>
 );
 
 export default Navbar;

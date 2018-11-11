@@ -34,11 +34,8 @@ const Index = (props) =>
 	</div>
 	
 	Index.getInitialProps = async function() {
-		const res = await fetch('http://0.0.0.0:6000/api/v1/tenders')
-		const data = await res.json()
-		console.log(data.json)
-		console.log(`Show data fetched. Count: ${data.length}`)
-	
+		const res = await fetch('http://0.0.0.0:5000/api/v1/tenders')
+		const data = await res.json()	
 		return {
 			tenders: data
 		}

@@ -1,12 +1,6 @@
 import styled from 'styled-components'
 import Link from 'next/link'
-
-const Truncate = styled.p`
-  height: 100px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-`
+import Truncate from 'react-truncate';
 
 const Line = styled.div`
   width: 100%;
@@ -22,14 +16,15 @@ class AllTenders extends React.Component {
       return (
         <div className="row">
           {this.props.tenders.map((data) => (
-            <div className="col-md-6 mb-6" key={data.public_id}>
+            <div className="col-md-12 mb-6" key={data.public_id}>
               <div className="card h-100">
                 <div className="card-body">
                   <h4 className="card-title"><strong>{data.title}</strong></h4>
-                  <Line></Line>
+                  {/* <Line></Line> */}
                   <Link as={`/category/tenders`} href={`/category?public_id=${data.category_id}`}><a>{data.category}</a></Link>
                   <br/>
-                  <Truncate className="card-text">{data.description}</Truncate>
+                  <p>COMPANY : {data.company_name}</p>
+                  <Truncate className="card-text" lines={3} ellipsis={<span>...</span>}>{data.description}</Truncate>
                   <ul>
                     <List><strong>Application Start Date : </strong> {data.application_start_date} </List>
                     <List><strong>Application Close Date : </strong> {data.application_close_date}</List>
