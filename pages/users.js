@@ -6,7 +6,7 @@ import Script from './components/dash/script'
 import Users from './components/dash/users'
 
 const UsersPage = (props) => 
-    <body style={{paddingTop: 20 + 'px'}}>
+    <div style={{paddingTop: 50 + 'px'}}>
         <Layout>
             <NavBar></NavBar>
             <div className="container-fluid">
@@ -19,7 +19,7 @@ const UsersPage = (props) =>
             </div>
         </Layout>
         <Script></Script>
-    </body>
+    </div>
 
 UsersPage.getInitialProps = async function() {
     const res = await fetch('http://0.0.0.0:5000/api/v1/users')

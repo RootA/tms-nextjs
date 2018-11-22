@@ -13,9 +13,9 @@ const Layout = (props) => (
       <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet"></link>
       <link src="https://cdn.jsdelivr.net/npm/react-s-alert@1.4.1/dist/s-alert-css-effects/stackslide.css"/>
 
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/css/bootstrap-select.min.css"/>
+      {/* <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/css/bootstrap-select.min.css"/>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/js/bootstrap-select.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/js/i18n/defaults-*.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/js/i18n/defaults-*.min.js"></script> */}
     </Head>
     <Navbar/>
     <div className="container-fluid">

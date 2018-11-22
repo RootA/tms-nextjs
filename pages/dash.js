@@ -5,6 +5,7 @@ import SideBar from './components/dash/sidebar'
 import Overview from './components/dash/overview'
 import Script from './components/dash/script'
 
+
 const DashPage = (props) => 
     <body style={{paddingTop: 20 + 'px'}}>
         <Layout>
@@ -22,12 +23,13 @@ const DashPage = (props) =>
     </body>
 
 DashPage.getInitialProps = async function() {
-    const res = await fetch('http://0.0.0.0:5000/api/v1/all/tenders')
-    const data = await res.json()	
+    const res = await fetch('http://0.0.0.0:5000/api/v1/all/tenders');
+    const data = await res.json();
     return {
         tenders: data
     }
 }
+
 
 export default DashPage
 

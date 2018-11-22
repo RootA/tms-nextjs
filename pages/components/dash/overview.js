@@ -74,7 +74,7 @@ class Overview extends React.Component{
                     {this.props.tenders.map((data) => (
                         <tr  key={data.public_id}>
                             <td>{data.index}</td>
-                            <Truncate lines={1} ellipsis={<span>...</span>}>{data.title}</Truncate>
+                            <td>{data.title}</td>
                             <td>{data.company_name}</td>
                             <td>{data.num_of_bids}</td>
                             <td>{data.created_at}</td>
