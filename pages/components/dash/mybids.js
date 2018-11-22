@@ -64,41 +64,65 @@ class MyBid extends React.Component{
 
     render(){
       var all_bids = this.state.dataset;
-      console.log(all_bids);
-        return(
-            <div className="container-fluid">
-                <SubHeader className="sub-header">Current Bids</SubHeader>
-                <div className="table-responsive">
-                    <table className="table table-striped">
-                        <thead>
-                        <tr>
-                            <th>Amount</th>
-                            <th>Duration</th>
-                            <th>Added on</th>
-                            <th>Tender Code</th>
-                            <th>Status</th>
-                            <th>Application Close Date</th>
-                            <th>Action</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {all_bids.map((bid, index) => (
-                            <tr  key={index}>
-                                <td>{bid.amount}</td>
-                                <td>{bid.duration} Days</td>
-                                <td>{bid.applied_at}</td>
-                                <td>{bid.tender.tender_code}</td>
-                                <td>{bid.tender.tender_code}</td>
-                                <td>{bid.status}</td>
-                                <td><a className="btn btn-danger" onClick={this.cancelBid(bid.public_id)}>Terminate bid</a></td>
+      console.log('length', all_bids.length);
+      if(all_bids.length < 0){
+            return (
+                <div className="container-fluid">
+                    <SubHeader className="sub-header">Current Bids</SubHeader>
+                    <div className="table-responsive">
+                        <table className="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>Amount</th>
+                                <th>Duration</th>
+                                <th>Added on</th>
+                                <th>Tender Code</th>
+                                <th>Status</th>
+                                <th>Application Close Date</th>
+                                <th>Action</th>
                             </tr>
-                        ))}
-                        </tbody> 
-                    </table>
+                            </thead>
+                            <tbody>
+                            </tbody> 
+                        </table>
+                    </div>
                 </div>
-            </div>
-
-        );
+            );
+      } else {
+            return(
+                <div className="container-fluid">
+                    <SubHeader className="sub-header">Current Bids</SubHeader>
+                    <div className="table-responsive">
+                        <table className="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>Amount</th>
+                                <th>Duration</th>
+                                <th>Added on</th>
+                                <th>Tender Code</th>
+                                <th>Status</th>
+                                <th>Application Close Date</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {all_bids.map((bid, index) => (
+                                <tr  key={index}>
+                                    <td>{bid.amount}</td>
+                                    <td>{bid.duration} Days</td>
+                                    <td>{bid.applied_at}</td>
+                                    <td>{bid.tender.tender_code}</td>
+                                    <td>{bid.status}</td>
+                                    <td>{bid.tender.application_close_date}</td>
+                                    <td><a className="btn btn-danger" onClick={this.cancelBid(bid.public_id)}>Terminate bid</a></td>
+                                </tr>
+                            ))}
+                            </tbody> 
+                        </table>
+                    </div>
+                </div>
+            );
+        }
     }
 }
 

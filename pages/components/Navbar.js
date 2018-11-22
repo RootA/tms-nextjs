@@ -31,7 +31,14 @@ class Navbar extends React.Component{
     } else {
       console.log('user logged in');
       let usertype_ = localStorage.getItem('user_type')
-      this.setState({isLoggedIn: true, uselink: 'dash' ,usertype: usertype_.replace(/^"(.+)"$/,'$1')})
+      let _Usertype_ = usertype_.replace(/^"(.+)"$/,'$1')
+      if(_Usertype_ == "Supplier"){
+        this.setState({isLoggedIn: true, uselink: 'mybids' ,usertype: usertype_.replace(/^"(.+)"$/,'$1')})
+      } else if(_Usertype_ == "Admin"){
+        this.setState({isLoggedIn: true, uselink: 'dash' , usertype: usertype_.replace(/^"(.+)"$/,'$1')})
+      } else {
+        this.setState({isLoggedIn: true, uselink: 'org' ,usertype: usertype_.replace(/^"(.+)"$/,'$1')})
+      }
     }
   }
   render(){

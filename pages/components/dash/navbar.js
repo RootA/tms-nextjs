@@ -1,4 +1,4 @@
-
+import React from 'react'
 
 class Navbar extends React.Component{
 
@@ -21,9 +21,9 @@ class Navbar extends React.Component{
     this.setState({user_type: user_type})
   }
 
-  logOut() {
-    // console.log('log out');
-  }
+  onClick() {
+    // localStorage.clear();
+  };
 
   render(){
     return(
@@ -43,7 +43,7 @@ class Navbar extends React.Component{
             {/* {/* <li><a href="#">Dashboard</a></li> */}
             {/* <li><a href="#">Settings</a></li> */}
             <li><a href="#">{(this.state.full_name).replace(/^"(.+)"$/,'$1')}</a></li>
-            <li><a onClick={this.logOut()}>Logout</a></li>
+            <li><a onClick={this.onClick()}>Logout</a></li>
           </ul>
           {/* <form className="navbar-form navbar-right">
             <input type="text" className="form-control" placeholder="Search..."/>
