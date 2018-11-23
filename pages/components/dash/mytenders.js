@@ -1,6 +1,7 @@
 import React from 'react';
 import request from "../../../node_modules/superagent/superagent"
 import styled from 'styled-components'
+import FileUpload from 'react-fileupload'
 
 const SubHeader = styled.h2`
     padding-bottom: 10px;
@@ -18,6 +19,9 @@ class MyTenders extends React.Component{
             dataset: []
         };
     }
+
+    
+
     componentDidMount(){
         if(!localStorage.getItem('tenders')){
             var public_id_l = localStorage.getItem('public_id');
@@ -40,7 +44,16 @@ class MyTenders extends React.Component{
             }
         });
     }
+
+    
     render(){
+        const options={
+            baseUrl:'http://127.0.0.1',
+            param:{
+                fid:0
+            }
+        }
+
       var all_bids = this.state.dataset;
       if(all_bids.length > 0){
         return(
@@ -75,7 +88,6 @@ class MyTenders extends React.Component{
                                 <td>{bid.tender.owner.email}</td>
                                 <td>{bid.tender.owner.phone_number}</td>
                                 <td>{bid.status}</td>
-                                <td><a className="btn btn-danger">Upload</a></td>
                             </tr>
                         ))}
                         </tbody> 

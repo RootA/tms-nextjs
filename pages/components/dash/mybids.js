@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import axios from 'axios';
+import axios, {post} from 'axios';
 import request from "../../../node_modules/superagent/superagent"
 
 const SubHeader = styled.h2`
@@ -15,9 +15,44 @@ class MyBid extends React.Component{
             isLoading: true,
             public_id: '',
             url_: '',
-            dataset: []
+            dataset: [],
+            image: ''
         };
+           
+        this.onFormSubmit = this.onFormSubmit.bind(this)
+        this.onChange = this.onChange.bind(this)
+        this.fileUpload = this.fileUpload.bind(this)
     }
+
+    onFormSubmit(e){
+        e.preventDefault() 
+        this.fileUpload(this.state.image);
+      }
+      onChange(e) {
+        let files = e.target.files || e.dataTransfer.files;
+        if (!files.length)
+              return;
+        this.createImage(files[0]);
+      }
+      createImage(file) {
+        let reader = new FileReader();
+        reader.onload = (e) => {
+          this.setState({
+            image: e.target.result
+          })
+        };
+        reader.readAsDataURL(file);
+      }
+      fileUpload(image){
+        var public_id_l = localStorage.getItem('public_id');
+        let public_id = public_id_l.replace(/^"(.+)"$/,'$1');
+        const url = 'http://localhost:5000/api/v1/bid/doc/upload/'+ public_id;
+        const formData = {file: this.state.image}
+        console.log('formData', formData);
+        return  post(url, formData)
+                .then(response => console.log(response))
+      }
+
     componentDidMount(){
         if(!localStorage.getItem('bids')){
             var public_id_l = localStorage.getItem('public_id');
@@ -37,7 +72,6 @@ class MyBid extends React.Component{
             console.log(res.body);
             if(res.statusCode == 200){
                 all_bids_array.push(res.body)
-                console.log('array',all_bids_array);
                 localStorage.setItem('bids', JSON.stringify(res.body));
             }
         });
@@ -103,6 +137,7 @@ class MyBid extends React.Component{
                                 <th>Tender Code</th>
                                 <th>Status</th>
                                 <th>Application Close Date</th>
+                                <th>Upload Docs</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -115,6 +150,12 @@ class MyBid extends React.Component{
                                     <td>{bid.tender.tender_code}</td>
                                     <td>{bid.status}</td>
                                     <td>{bid.tender.application_close_date}</td>
+                                    <td>
+                                        <form onSubmit={this.onFormSubmit}>
+                                             <input type="file"  onChange={this.onChange} />
+                                             <button type="submit">Upload</button>
+                                         </form>
+                                    </td>
                                     <td><a className="btn btn-danger" onClick={this.cancelBid(bid.public_id)}>Terminate bid</a></td>
                                 </tr>
                             ))}
