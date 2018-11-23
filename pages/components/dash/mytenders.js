@@ -1,7 +1,6 @@
 import React from 'react';
-
+import request from "../../../node_modules/superagent/superagent"
 import styled from 'styled-components'
-import axios from 'axios';
 
 const SubHeader = styled.h2`
     padding-bottom: 10px;
@@ -27,45 +26,23 @@ class MyTenders extends React.Component{
             this.fetchBids(public_id)
         } else {
             this.setState({dataset: JSON.parse(localStorage.getItem('tenders'))})
-            console.log('using localstorgae')
         }
     }
 
     fetchBids(public_id){
         var all_bids_array = [];
         let dataurl = 'http://0.0.0.0:5000/api/v1/my/tenders/' + public_id;
-        axios.get(dataurl).then(response => {
-            all_bids_array.push(response.data);
-            this.setState({
-                dataset: all_bids_array
-            });
-            localStorage.setItem('tenders', JSON.stringify(response.data));
+
+        request.get(dataurl).end(function(err, res){
+            if(res.statusCode == 200){
+                all_bids_array.push(res.body)
+                localStorage.setItem('tenders', JSON.stringify(res.body));
+            }
         });
     }
-
-    // cancelBid(bid_id){
-    //     var all_bids_array = [];
-    //     let dataurl = 'http://0.0.0.0:5000/api/v1/terminate/bid/' + bid_id;
-    //     axios.get(dataurl).then(res => {
-    //         if(res.status == 200){
-    //             let dataurl2 = 'http://0.0.0.0:5000/api/v1/my/bids/' + this.state.public_id;
-    //             console.log('url', dataurl2);
-    //             axios.get(dataurl2).then(response => {
-    //                 all_bids_array.push(response.data);
-    //                 this.setState({
-    //                     dataset: all_bids_array
-    //                 });
-    //                 localStorage.setItem('bids', JSON.stringify(response.data));
-    //             });
-    //         } else {
-    //             alert('An error has occured');
-    //         }
-    //     });
-    // }
-
     render(){
       var all_bids = this.state.dataset;
-      console.log(all_bids);
+      if(all_bids.length > 0){
         return(
             <div className="container-fluid">
                 <SubHeader className="sub-header">Current Tenders</SubHeader>
@@ -81,7 +58,8 @@ class MyTenders extends React.Component{
                             <th>Contant Person</th>
                             <th>Contant Person Email</th>
                             <th>Contant Person Phone Number</th>
-                            {/* <th>Action</th> */}
+                            <th>Status</th>
+                            <th>Upload Docs</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -94,9 +72,10 @@ class MyTenders extends React.Component{
                                 <td>{bid.tender.tender_code}</td>
                                 <td>{bid.tender.owner.company}</td>
                                 <td>{bid.tender.owner.fullname}</td>
+                                <td>{bid.tender.owner.email}</td>
                                 <td>{bid.tender.owner.phone_number}</td>
                                 <td>{bid.status}</td>
-                                {/* <td><a className="btn btn-danger" onClick={this.cancelBid(bid.public_id)}>Terminate bid</a></td> */}
+                                <td><a className="btn btn-danger">Upload</a></td>
                             </tr>
                         ))}
                         </tbody> 
@@ -105,6 +84,32 @@ class MyTenders extends React.Component{
             </div>
 
         );
+      } else {
+          return(
+            <div className="container-fluid">
+            <SubHeader className="sub-header">Current Tenders</SubHeader>
+            <div className="table-responsive">
+                <table className="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Amount</th>
+                        <th>Duration</th>
+                        <th>Added on</th>
+                        <th>Tender Code</th>
+                        <th>Owner</th>
+                        <th>Contant Person</th>
+                        <th>Contant Person Email</th>
+                        <th>Contant Person Phone Number</th>
+                        {/* <th>Action</th> */}
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody> 
+                    </table>
+                </div>
+            </div>
+          );
+      }
     }
 }
 

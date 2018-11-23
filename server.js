@@ -17,6 +17,12 @@ app.prepare()
       app.render(req, res, actualPage, queryParams)
   })
 
+  server.get('/apply/:public_id', (req, res) => {
+    const actualPage = '/apply'
+    const queryParams = { public_id: req.params.public_id }
+    app.render(req, res, actualPage, queryParams)
+  })
+
   server.get('/readmore/:public_id', (req, res) => {
     const actualPage = '/readmore'
     const queryParams = { public_id: req.params.public_id }

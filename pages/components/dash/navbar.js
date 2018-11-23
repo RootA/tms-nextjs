@@ -1,4 +1,5 @@
 import React from 'react'
+import Router from 'next/router'
 
 class Navbar extends React.Component{
 
@@ -22,7 +23,7 @@ class Navbar extends React.Component{
   }
 
   onClick() {
-    // localStorage.clear();
+    Router.pathname("/")
   };
 
   render(){
@@ -43,7 +44,7 @@ class Navbar extends React.Component{
             {/* {/* <li><a href="#">Dashboard</a></li> */}
             {/* <li><a href="#">Settings</a></li> */}
             <li><a href="#">{(this.state.full_name).replace(/^"(.+)"$/,'$1')}</a></li>
-            <li><a onClick={this.onClick()}>Logout</a></li>
+            <li><a onClick={() => { localStorage.clear(); Router.push("/")}}>Logout</a></li>
           </ul>
           {/* <form className="navbar-form navbar-right">
             <input type="text" className="form-control" placeholder="Search..."/>

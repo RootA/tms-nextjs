@@ -14,14 +14,15 @@ import Router from 'next/router'
         event.preventDefault()
 
         var apiBaseUrl = "http://localhost:5000/api/v1/login";
-        var payload= {
+        var payload = {
             "email": event.target.elements.email.value,
             "password": event.target.elements.password.value
         }
 
-        alert('payload', payload);
-        
+        console.log('payload', payload);
         axios.post(apiBaseUrl, payload).then(function (response) {
+            console.log('we are here');
+            console.log('response', response.data);
             if(response.status == 200){
                 localStorage.setItem('auth_token', JSON.stringify(response.data.auth_token));
                 localStorage.setItem('company_name', JSON.stringify(response.data.company_name));
@@ -33,14 +34,19 @@ import Router from 'next/router'
                 localStorage.setItem('user_type', JSON.stringify(response.data.user_type));
                 sessionStorage.setItem('public_id', response.data.public_id);
 
-                console.log('session',sessionStorage.getItem('public_id'));
-
-                if (response.data.user_type == "Admin"){
+                let user_type = response.data.user_type 
+                if (user_type == "Admin"){
                     Router.push("/dash");
+                } else if (user_type == "Supplier"){
+                    Router.push("/mybids");
+                } else {
+                    Router.push("/org");
                 }
+            } else if(response.status >= 400){
+                alert("something went wrong, try again later");
             }
         }).catch(function (error) {
-            console.log('error',error);
+            console.error('error',error);
         });
       }
 
@@ -61,15 +67,9 @@ import Router from 'next/router'
                                     <div className="form-group">
                                         <input type="password" name="password" id="password"  ref={node => (this.inputNode = node)} className="form-control input-lg" placeholder="Password"  ref="password" required  />
                                     </div>
-                                    <span className="button-checkbox">
-                                        {/* <button type="button" className="btn" data-color="info">Remember Me</button> */}
-                                        {/* <input type="checkbox" name="remember_me" id="remember_me" checked="checked" className="hidden"/> */}
-                                        {/* <Link><a href="/signup" className="btn btn-link pull-right">Forgot Password?</a></Link> */}
-                                    </span>
                                     <hr className="colorgraph"/>
                                     <div className="row">
                                         <div className="col-xs-6 col-sm-6 col-md-6">
-                                            {/* <button className="btn btn-lg btn-success btn-block">Sign In</button> */}
                                             <input type="submit" className="btn btn-lg btn-success btn-block" value="Sign In"/>
                                         </div>
                                         <div className="col-xs-6 col-sm-6 col-md-6">

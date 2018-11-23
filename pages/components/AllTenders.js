@@ -14,7 +14,7 @@ const List = styled.li`
 class AllTenders extends React.Component {
     render() {
       return (
-        <div className="row">
+        <div className="row" style={{clear: "dow", position: "relative"}}>
           {this.props.tenders.map((data) => (
             <div className="col-md-12 mb-6" key={data.public_id}>
               <div className="card h-100">

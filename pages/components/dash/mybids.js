@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import axios from 'axios';
+import request from "../../../node_modules/superagent/superagent"
 
 const SubHeader = styled.h2`
     padding-bottom: 10px;
@@ -25,20 +26,20 @@ class MyBid extends React.Component{
             this.fetchBids(public_id)
         } else {
             this.setState({dataset: JSON.parse(localStorage.getItem('bids'))})
-            console.log('using localstorgae')
         }
     }
 
     fetchBids(public_id){
-        console.log('we are at update');
         var all_bids_array = [];
         let dataurl = 'http://0.0.0.0:5000/api/v1/my/bids/' + public_id;
-        axios.get(dataurl).then(response => {
-            all_bids_array.push(response.data);
-            this.setState({
-                dataset: all_bids_array
-            });
-            localStorage.setItem('bids', JSON.stringify(response.data));
+        
+        request.get(dataurl).end(function(err, res){
+            console.log(res.body);
+            if(res.statusCode == 200){
+                all_bids_array.push(res.body)
+                console.log('array',all_bids_array);
+                localStorage.setItem('bids', JSON.stringify(res.body));
+            }
         });
     }
 
@@ -64,7 +65,7 @@ class MyBid extends React.Component{
 
     render(){
       var all_bids = this.state.dataset;
-      console.log('length', all_bids.length);
+
       if(all_bids.length < 0){
             return (
                 <div className="container-fluid">
@@ -88,7 +89,7 @@ class MyBid extends React.Component{
                     </div>
                 </div>
             );
-      } else {
+      } else if(all_bids.length > 0) {
             return(
                 <div className="container-fluid">
                     <SubHeader className="sub-header">Current Bids</SubHeader>
@@ -123,6 +124,28 @@ class MyBid extends React.Component{
                 </div>
             );
         }
+        return (
+            <div className="container-fluid">
+                <SubHeader className="sub-header">Current Bids</SubHeader>
+                <div className="table-responsive">
+                    <table className="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Amount</th>
+                            <th>Duration</th>
+                            <th>Added on</th>
+                            <th>Tender Code</th>
+                            <th>Status</th>
+                            <th>Application Close Date</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </tbody> 
+                    </table>
+                </div>
+            </div>
+        );
     }
 }
 

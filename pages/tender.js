@@ -4,6 +4,8 @@ import Footer from './components/Footer.js'
 import JumboTron from './components/Jumbotron.js'
 import styled from 'styled-components'
 import Link from 'next/link'
+import React from 'react'
+import Router from 'next/router'
 
 
 const Heading = styled.h1`
@@ -49,7 +51,7 @@ const Tender = (props) =>
 						<Heading>{props.tender.title}</Heading>
 						<Heading2>Company : {props.tender.company_name}</Heading2>
 						<Link as={`/category/tenders`} href={`/category?public_id=${props.tender.category_id}`}><Heading3>Category : {props.tender.category} </Heading3></Link>
-						<Caps>Tender Code : {props.tender.public_id} </Caps>
+						<Caps>Tender Code : {props.tender.tender_code} </Caps>
 						<br/>
 						<Line></Line>
 						<br/>
@@ -68,7 +70,7 @@ const Tender = (props) =>
 								</ul>
 								</div>
 						</div>
-						<button className="btn btn-warning">Apply Now</button>
+						<Link as={`/apply/${props.tender.public_id}`}  href={`/apply?public_id=${props.tender.public_id}`} onClick={onClick}><a className="btn btn-warning">Apply Now</a></Link>
 					</Layout>
 				</div>
 			</div>
@@ -91,11 +93,17 @@ const Tender = (props) =>
 		`}</style>
 	</div>
 
+function onClick() {
+	if(!localStorage.getItem('auth_token')){
+		alert('You have to login first');
+		Router.push("/login");
+	}
+}
+
 Tender.getInitialProps = async function (context) {
 	const {public_id} = context.query
 	const res = await fetch(`http://0.0.0.0:5000/api/v1/tenders/${public_id}`)
 	const tender = await res.json()
-	console.log(`Fetched tender: ${tender.title}`)
 	return { tender }
 }
 

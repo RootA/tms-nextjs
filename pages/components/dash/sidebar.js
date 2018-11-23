@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { relativeTimeRounding } from 'moment';
 
 const Navsidebar=styled.ul`
     margin-right: -21px;
@@ -44,9 +43,9 @@ class SideBar extends React.Component{
       }
 
     render() {
-        const user_type = this.state.user_type;
+        const user_type = (this.state.user_type).replace(/^"(.+)"$/,'$1');
         let sidebar;
-        if(this.state.user_type.replace(/^"(.+)"$/,'$1') == "Admin"){
+        if(user_type == "Admin"){
             return(
                 <Sidebar_ className="col-sm-3 col-md-2">
                         <Navsidebar className="nav">
@@ -57,7 +56,7 @@ class SideBar extends React.Component{
                         </Navsidebar>
                     </Sidebar_>
             );
-        } else if (this.state.user_type.replace(/^"(.+)"$/,'$1') == "Supplier"){
+        } else if (user_type == "Supplier"){
             return(
                 <div>
                     <Sidebar_ className="col-sm-3 col-md-2">
@@ -70,11 +69,28 @@ class SideBar extends React.Component{
                     </Sidebar_>
                 </div>
             );
+        } else if (user_type == "Organization") {
+            return (
+                <div>
+                    <Sidebar_ className="col-sm-3 col-md-2">
+                        <Navsidebar className="nav">
+                            {/* <li className="active"><a href="/dash">Overview <span className="sr-only">(current)</span></a></li> */}
+                            <li><a href="/org">My Tenders</a></li>
+                            <li><a href="/createtender">Create Tender</a></li>
+                            {/* <li><a href="/categories">Categories</a></li> */}
+                        </Navsidebar>
+                    </Sidebar_>
+                </div>
+            );
+        } else {
+            return (
+                <div>
+
+                </div>
+            );
         }
 
-        return (
-            <div></div>
-        );
+
         
     }
 }
