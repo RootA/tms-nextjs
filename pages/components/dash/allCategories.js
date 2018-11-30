@@ -9,7 +9,7 @@ class AllCategories extends React.Component{
         return(
             <div className="container-fluid">    
             <SubHeader className="sub-header">Current Categories</SubHeader>
-            <button className="btn btn-info">Add new</button>
+            <a className="btn btn-info" href="/add_category">Add new</a>
             <div className="table-responsive">
                 <table className="table table-striped">
                   <thead>

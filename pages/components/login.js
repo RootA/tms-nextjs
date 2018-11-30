@@ -19,10 +19,7 @@ import Router from 'next/router'
             "password": event.target.elements.password.value
         }
 
-        console.log('payload', payload);
         axios.post(apiBaseUrl, payload).then(function (response) {
-            console.log('we are here');
-            console.log('response', response.data);
             if(response.status == 200){
                 localStorage.setItem('auth_token', JSON.stringify(response.data.auth_token));
                 localStorage.setItem('company_name', JSON.stringify(response.data.company_name));
