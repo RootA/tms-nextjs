@@ -8,7 +8,8 @@ class Navbar extends React.Component{
     this.state={
       fromLocal:'',
       full_name: '',
-      user_type: ''
+      user_type: '',
+      cname_ : ''
     }
   }
 
@@ -16,10 +17,12 @@ class Navbar extends React.Component{
     let newSearchColumns = localStorage.getItem('auth_token');
     let name = localStorage.getItem('full_name');
     let user_type = localStorage.getItem('user_type');
+    let cname_ = localStorage.getItem('company_name');
 
     this.setState({fromLocal: newSearchColumns})
     this.setState({full_name: name})
     this.setState({user_type: user_type})
+    this.setState({cname_: cname_})
   }
 
   onClick() {
@@ -37,7 +40,7 @@ class Navbar extends React.Component{
             <span className="icon-bar"></span>
             <span className="icon-bar"></span>
           </button>
-          <a className="navbar-brand" href="/">TMS {(this.state.user_type).replace(/^"(.+)"$/,'$1')}</a>
+          <a className="navbar-brand" href="/">TMS {(this.state.user_type).replace(/^"(.+)"$/,'$1')} | {(this.state.cname_).replace(/^"(.+)"$/,'$1')}</a>
         </div>
         <div id="navbar" className="navbar-collapse collapse">
           <ul className="nav navbar-nav navbar-right">

@@ -26,4 +26,12 @@ class OrgPage extends React.Component {
         );
     }
 }
+
+OrgPage.getInitialProps = async function (context) {
+	const {public_id} = context.query
+	const res = await fetch(`http://0.0.0.0:5000/api/v1/tenders/${public_id}`)
+	const tender = await res.json()
+	return { tender: tender }
+}
+
 export default OrgPage

@@ -24,6 +24,7 @@ class AllTenders extends React.Component {
                   <Link as={`/category/tenders`} href={`/category?public_id=${data.category_id}`}><a>{data.category}</a></Link>
                   <br/>
                   <p>COMPANY : {data.company_name}</p>
+                  <p>CODE : {data.tender_code}</p>
                   <Truncate className="card-text" lines={3} ellipsis={<span>...</span>}>{data.description}</Truncate>
                   <ul>
                     <List><strong>Application Start Date : </strong> {data.application_start_date} </List>

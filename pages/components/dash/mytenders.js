@@ -72,7 +72,7 @@ class MyTenders extends React.Component{
                             <th>Contant Person Email</th>
                             <th>Contant Person Phone Number</th>
                             <th>Status</th>
-                            <th>Upload Docs</th>
+                            {/* <th>Upload Docs</th> */}
                         </tr>
                         </thead>
                         <tbody>

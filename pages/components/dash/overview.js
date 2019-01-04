@@ -27,33 +27,7 @@ class Overview extends React.Component{
     render(){
         return(
             <div className="container-fluid">
-            {/* <h1 className="page-header">Dashboard</h1>
-            <Placeholder_ class="row placeholders">
-                <div class="col-xs-6 col-sm-3 placeholder">
-                    <Placeholderimg_ src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail"/>
-                    <Placeholderh4_>Label</Placeholderh4_>
-                    <span class="text-muted">Something else</span>
-                </div>
-                <div class="col-xs-6 col-sm-3 placeholder">
-                    <Placeholderimg_ src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail"/>
-                    <Placeholderh4_>Label</Placeholderh4_>
-                    <span class="text-muted">Something else</span>
-                </div>
-                <div class="col-xs-6 col-sm-3 placeholder">
-                    <Placeholderimg_ src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail"/>
-                    <Placeholderh4_>Label</Placeholderh4_>
-                    <span class="text-muted">Something else</span>
-                </div>
-                <div class="col-xs-6 col-sm-3 placeholder">
-                    <Placeholderimg_ src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail"/>
-                    <Placeholderh4_>Label</Placeholderh4_>
-                    <span class="text-muted">Something else</span>
-                </div>
-            </Placeholder_> */}
-    
-            <div style={{paddingBottom:30+'px'}}></div>
-
-    
+            <div style={{paddingBottom:30+'px'}}></div>    
             <SubHeader className="sub-header">Current Tenders</SubHeader>
               <div className="table-responsive">
                 <table className="table table-striped">

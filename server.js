@@ -23,6 +23,12 @@ app.prepare()
     app.render(req, res, actualPage, queryParams)
   })
 
+  server.get('/view/bids/:public_id', (req, res) => {
+    const actualPage = '/orgbids'
+    const queryParams = { public_id: req.params.public_id }
+    app.render(req, res, actualPage, queryParams)
+  })
+
   server.get('/readmore/:public_id', (req, res) => {
     const actualPage = '/readmore'
     const queryParams = { public_id: req.params.public_id }

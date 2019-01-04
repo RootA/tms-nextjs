@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import axios from 'axios';
 import ReactUploadFile from 'react-upload-file';
 import Router from 'next/router'
+import Link from 'next/link'
 
 const SubHeader = styled.h2`
     padding-bottom: 10px;
@@ -74,6 +75,15 @@ class OrgTenders extends React.Component {
             }
         });
     }
+
+
+    onClick() {
+        if(!localStorage.getItem('auth_token')){
+            alert('You have to login first');
+            Router.push("/login");
+        }
+    }
+
     render(){
         var tenders = this.state.dataset;
         // const options = {
@@ -121,7 +131,8 @@ class OrgTenders extends React.Component {
                                         <input type="submit" value="Upload Doc" name="submit" className="btn btn-primary"/>
                                     </form>
                                 </td>
-                                <td><a className="btn btn-info">View Bids</a></td>
+                                {/* <td><a className="btn btn-info">View Bids</a></td> */}
+                                <td><Link as={`/view/bids/${tender.public_id}`}  href={`/view/bids?public_id=${tender.public_id}`} onClick={this.onClick}><a className="btn btn-warning">View Bids</a></Link></td>
                             </tr>
                         ))}
                         </tbody> 

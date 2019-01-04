@@ -4,15 +4,9 @@ import Alert from 'react-s-alert';
 import { toast } from 'react-toastify';
 import Select from 'react-select';
 
-// const options = [
-//     { value: 'chocolate', label: 'Chocolate' },
-//     { value: 'strawberry', label: 'Strawberry' },
-//     { value: 'vanilla', label: 'Vanilla' }
-//   ];
+var categories = [];
 
-const categories = []
-
-const usertypes = []
+var usertypes = [];
 
 
  class Signup extends React.Component {
@@ -22,18 +16,16 @@ const usertypes = []
       }
       handleChange0 = (selectedOption) => {
         this.setState({ selectedOption });
-        console.log(`Option selected:`, selectedOption);
       }
 
       handleChange1 = (selectedOption1) => {
         this.setState({ selectedOption1 });
-        console.log(`Option selected:`, selectedOption1);
       }
 
     constructor(props) {
         super(props);
         this.state = {
-            first_name: 'sdsd',
+            first_name: '',
             last_name: ' ',
             phone_number: '',
             company_name: '',
@@ -81,23 +73,13 @@ const usertypes = []
         const { selectedCategory } = this.state.category_id;
         const { selectedType } = this.state.user_type;
 
-        const data = this.props.categories
-
-        for (let a = 0;a < data.length; a++){
-            categories.push({ value: data[a].public_id, label: data[a].name })
-        }
-
-        const data1 = this.props.usertypes
-
-        for (let i = 0;i < data1.length; i++){
-            usertypes.push({ value: data1[i].public_id, label: data1[i].name })
-        }
-
+        categories = this.props.categories
+        usertypes = this.props.usertypes
 
          return (
                 <div className="container">
                     <div className="row" style={{marginTop:100 + 'px'}}>
-                        <div className="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+                        <div className="col-xs-12 col-sm-8 col-md-8 col-sm-offset-2 col-md-offset-6">
                             <form role="form">
                                 <fieldset>
                                     <h2>Complete the form and join the TMS family</h2>
@@ -116,7 +98,7 @@ const usertypes = []
                                     </div>
                                     <label>Company Name</label>
                                     <div className="form-group">
-                                        <input type="text" name="company_name" id="company_name" className="form-control input-lg" placeholder=""  ref="company_name" value={this.state.company_name} onChange={e => this.handleChange(e)}/>
+                                        <input type="text" name="company_name" id="company_name" className="form-control input-lg" placeholder="LEX Corp"  ref="company_name" value={this.state.company_name} onChange={e => this.handleChange(e)}/>
                                     </div>
                                     <label>Address</label>
                                     <div className="form-group">
@@ -124,7 +106,7 @@ const usertypes = []
                                     </div>
                                     <label>Email</label>
                                     <div className="form-group">
-                                        <input type="text" name="email" id="email" className="form-control input-lg" placeholder=""  ref="email" value={this.state.email} onChange={e => this.handleChange(e)}/>
+                                        <input type="text" name="email" id="email" className="form-control input-lg" placeholder="text@example.com"  ref="email" value={this.state.email} onChange={e => this.handleChange(e)}/>
                                     </div>
                                     <label>Describe what you do?</label>
                                     <div className="form-group">
